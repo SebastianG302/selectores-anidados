@@ -11,6 +11,8 @@ import { Observable, pipe, switchMap } from 'rxjs';
 })
 export class SelectorPageComponent implements OnInit{
 
+  public countriesByRegion: SmallCountry[] = [];
+
   public myForm: FormGroup = this.fb.group({
     region: ['', Validators.required],
     country: ['', Validators.required],
@@ -35,8 +37,8 @@ export class SelectorPageComponent implements OnInit{
       .pipe(
         switchMap(region => this.countriesService.getCountriesByRegion(region))
       )
-      .subscribe(region => {
-        console.log(region);
+      .subscribe(country => {
+        this.countriesByRegion = country;
       })
   }
 
